@@ -1,13 +1,13 @@
 package tickets;
 
-class Solution {
+class TicketsCost {
 
-    public int mincostTickets(int[] days, int[] costs) {
+    public int minCostTickets(int[] days, int[] costs) {
         int firstDay = days[0];
         int lastDay = days[days.length - 1];
 
         int[] minimumCostsSoFar = new int[lastDay + 1];
-        minimumCostsSoFar[firstDay] = costs[0];
+        minimumCostsSoFar[firstDay] = Math.min(costs[0], Math.min(costs[1], costs[2]));
 
         for (int i = 1; i < days.length; i++) {
             int travelDay = days[i];
@@ -23,14 +23,14 @@ class Solution {
             int moneySpentBuyingWeeklyTicket = weekAgo >= firstDay ? minimumCostsSoFar[weekAgo - 1] + costs[1] : costs[1];
             if (moneySpentBuyingWeeklyTicket < minimumCostSoFar) {
                 minimumCostSoFar = moneySpentBuyingWeeklyTicket;
-                updateCosts(minimumCostsSoFar, weekAgo, travelDay, minimumCostSoFar);
+                minimumCostsSoFar[travelDay] = minimumCostSoFar;
             }
 
             int monthAgo = travelDay - 30 + 1;
             int moneySpentBuyingMonthlyTicket = monthAgo >= firstDay ? minimumCostsSoFar[monthAgo - 1] + costs[2] : costs[2];
             if (moneySpentBuyingMonthlyTicket < minimumCostSoFar) {
                 minimumCostSoFar = moneySpentBuyingMonthlyTicket;
-                updateCosts(minimumCostsSoFar, monthAgo, travelDay, minimumCostSoFar);
+                minimumCostsSoFar[travelDay] = minimumCostSoFar;
             }
         }
         return minimumCostsSoFar[lastDay];
