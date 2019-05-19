@@ -25,9 +25,9 @@ public class TrominoTilingCheckerTest {
         };
         return new Object[][]{
                 {twoByTwoBoard, new Square(0, 0), 1, true},
-                {fourByFourBoard, new Square(2, 1), 5, true},
+                {fourByFourBoard, new Square(1, 2), 5, true},
                 {incorrectlyColoredTwoByTwoBoard, new Square(0, 0), 3, false},
-                {incorrectlyColoredFourByFourBoard, new Square(2, 1), 5, false}
+                {incorrectlyColoredFourByFourBoard, new Square(1, 2), 5, false}
         };
     }
 

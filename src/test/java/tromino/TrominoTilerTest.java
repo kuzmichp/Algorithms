@@ -12,8 +12,12 @@ public class TrominoTilerTest {
     @DataProvider(name = "inputParametersProvider")
     public Object[][] getInputParameters() {
         return new Object[][]{
-                { 4, new Square(2,1) },
-                { 8, new Square(4, 4) }
+                {1, new Square(0, 0)},
+                {2, new Square(0, 0)},
+                {4, new Square(2, 1)},
+                {4, new Square(3, 0)},
+                {8, new Square(4, 4)},
+                {16, new Square(3, 7)}
         };
     }
 
