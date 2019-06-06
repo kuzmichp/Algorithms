@@ -15,10 +15,10 @@ class TrominoTilingChecker {
         int n = board.length;
         for (int y = 0; y < n; y++) {
             for (int x = 0; x < n; x++) {
-                if (y == missingSquare.y && x == missingSquare.x) {
+                if (x == missingSquare.x && y == missingSquare.y) {
                     continue;
                 }
-                usedColors.add(board[y][x]);
+                usedColors.add(board[x][y]);
             }
         }
         return usedColors.size();
@@ -28,13 +28,13 @@ class TrominoTilingChecker {
         int n = board.length;
         boolean[][] checked = new boolean[n][n];
         // Mark the missing square as checked
-        checked[missingSquare.y][missingSquare.x] = true;
+        checked[missingSquare.x][missingSquare.y] = true;
         TreeSet<Square> squares = getValidSquares(n, missingSquare);
         while (!squares.isEmpty()) {
             Square square = squares.pollFirst();
             List<Square> tile = findTile(board, square, checked);
             // Mark all squares from a tile as checked
-            tile.forEach(s -> checked[s.y][s.x] = true);
+            tile.forEach(s -> checked[s.x][s.y] = true);
             if (tile.size() != 3 || !isCorrectShape(tile)) {
                 return false;
             }
@@ -55,10 +55,10 @@ class TrominoTilingChecker {
         for (int y = square.y - 1; y <= square.y + 1; y++) {
             for (int x = square.x - 1; x <= square.x + 1; x++) {
                 // Check if a square is out of the board or already checked
-                if (y < 0 || y >= n || x < 0 || x >= n || checked[y][x]) {
+                if (y < 0 || y >= n || x < 0 || x >= n || checked[x][y]) {
                     continue;
                 }
-                if (board[y][x] == board[square.y][square.x]) {
+                if (board[x][y] == board[square.x][square.y]) {
                     tile.add(new Square(x, y));
                 }
             }
